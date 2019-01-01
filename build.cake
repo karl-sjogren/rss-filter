@@ -64,8 +64,15 @@ Task("azure-pipeline")
         var settings = new DotNetCoreTestSettings {
             Logger = "trx;LogFileName=TestResults.trx"
          };
+
+        var coverletSettings = new CoverletSettings {
+            CollectCoverage = true,
+            CoverletOutputFormat = CoverletOutputFormat.cobertura | CoverletOutputFormat.opencover,
+            CoverletOutputDirectory = Directory(@".\coverage\"),
+            CoverletOutputName = $"results-{DateTime.UtcNow:dd-MM-yyyy-HH-mm-ss-FFF}"
+        };
             
-        DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings);
+        DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings, coverletSettings);
     });
 
 Task("default")
