@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Xml.Linq;
 using Shorthand.RssFilter.Contracts;
@@ -7,6 +8,9 @@ using Shorthand.RssFilter.Models;
 namespace Shorthand.RssFilter.Services {
     public class RssFilterService : IRssFilterService {
         public void FilterFeed(FeedConfiguration feedConfiguration, XDocument document) {
+            _ = feedConfiguration ?? throw new ArgumentNullException(nameof(feedConfiguration));
+            _ = document ?? throw new ArgumentNullException(nameof(document));
+
             var items = document.Descendants("item").ToArray();
 
             foreach(var item in items) {
@@ -23,7 +27,7 @@ namespace Shorthand.RssFilter.Services {
 
                     var allPassed = true;
 
-                    foreach(var filter in feedItem.Filters) {
+                    foreach(var filter in feedItem.Filters.Concat(feedConfiguration.Filters)) {
                         if(filter == null)
                             continue;
 

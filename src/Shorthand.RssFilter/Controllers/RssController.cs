@@ -38,9 +38,17 @@ namespace Shorthand.RssFilter.Controllers {
         }
 
         [HttpGet("{name}")]
+        public ActionResult<string> GetFeedInformation(string name) {
+            if(!_configuration.TryGetValue(name, out var feedConfiguration))
+                return NotFound();
+
+            return new JsonResult(feedConfiguration);
+        }
+
+        [HttpGet("{name}/feed")]
         public async Task<ActionResult<string>> GetFilteredFeed(string name) {
             if(!_configuration.TryGetValue(name, out var feedConfiguration))
-                return BadRequest();
+                return NotFound();
 
             var document = await _rssService.GetFilteredFeed(feedConfiguration);
             

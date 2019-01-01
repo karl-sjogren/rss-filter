@@ -16,4 +16,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Shorthand.RssFilter\Shorthand.RssFilter.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Resources\*.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\*.xml" />
+  </ItemGroup>
 </Project>

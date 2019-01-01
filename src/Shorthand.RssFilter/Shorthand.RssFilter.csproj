@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(SolutionDir)feeds.json" CopyToOutputDirectory="Always" />
+    <None Include="$(ProjectDir)feeds.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>

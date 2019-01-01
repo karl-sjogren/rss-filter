@@ -32,5 +32,22 @@ namespace Shorthand.RssFilter.Tests {
             Assert.NotNull(result);
             Assert.Equal(typeof(ContainsFilter), result.GetType());
         }
+
+        [Fact]
+        public void TestReadRegexFilter() {
+            var json = @"{
+                ""MatchOn"": ""Title"",
+                ""Type"": ""Regex"",
+                ""Value"": "".*""
+              }";
+
+            var result = JsonConvert.DeserializeObject<FilterBase>(json, new FilterBaseConverter());
+
+            Assert.NotNull(result);
+            Assert.Equal(typeof(RegexFilter), result.GetType());
+
+            // This should not throw
+            _ = result.Evaluate("zebra");
+        }
     }
 }

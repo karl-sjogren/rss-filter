@@ -49,6 +49,16 @@ Task("test")
         DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings);
     });
 
+Task("azure-pipeline")
+    .IsDependentOn("clean")
+    .Does(() => {
+        var settings = new DotNetCoreTestSettings {
+            Logger = "trx;LogFileName=TestResults.trx"
+         };
+            
+        DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings);
+    });
+
 Task("default")
     .IsDependentOn("build");
 

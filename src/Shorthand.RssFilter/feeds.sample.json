@@ -1,6 +1,14 @@
 {
     "Aftonbladet": {
       "Uri": "http://www.aftonbladet.se/rss.xml",
+      "Filters": [
+        {
+          "MatchOn": "Title",
+          "Type": "Contains",
+          "Value": "kardashian",
+          "Negative": true
+        }
+      ],
       "Items": [
         {
           "Name": "Regular news",
