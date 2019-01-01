@@ -34,8 +34,8 @@ jobs:
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'cobertura'
-      summaryFileLocation: 'coverage/results.cobertura.xml'
-      reportDirectory: 'coverage/html'
+      summaryFileLocation: '$(Build.SourcesDirectory)/coverage/results.cobertura.xml'
+      reportDirectory: '$(Build.SourcesDirectory)/coverage/html'
 
 # Run a build on Windows at the same time
 - job: Windows
@@ -61,5 +61,5 @@ jobs:
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'cobertura'
-      summaryFileLocation: 'coverage\results.cobertura.xml'
-      reportDirectory: 'coverage\html'
+      summaryFileLocation: '$(Build.SourcesDirectory)\coverage\results.cobertura.xml'
+      reportDirectory: '$(Build.SourcesDirectory)\coverage\html'
