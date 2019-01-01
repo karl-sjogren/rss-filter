@@ -1,3 +1,5 @@
+#addin nuget:?package=Cake.Coverlet&version=2.1.2
+
 using System.Xml.Linq;
 
 var target = Argument("target", "default");
@@ -45,8 +47,15 @@ Task("test")
             Logger = "console;verbosity=normal",
             TestAdapterPath = "."
          };
+
+        var coverletSettings = new CoverletSettings {
+            CollectCoverage = true,
+            CoverletOutputFormat = CoverletOutputFormat.cobertura | CoverletOutputFormat.opencover,
+            CoverletOutputDirectory = Directory(@".\coverage\"),
+            CoverletOutputName = $"results-{DateTime.UtcNow:dd-MM-yyyy-HH-mm-ss-FFF}"
+        };
             
-        DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings);
+        DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings, coverletSettings);
     });
 
 Task("azure-pipeline")

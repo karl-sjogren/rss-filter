@@ -342,3 +342,6 @@ healthchecksdb
 
 # OSX files
 .DS_Store
+
+# Coverage files
+coverage/

@@ -24,6 +24,10 @@ jobs:
     inputs:
       testRunner: VSTest
       testResultsFiles: '**/*.trx'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'cobertura'
+      summaryFileLocation: '**/*.cobertura.xml'
 
 # Run a build on Windows at the same time
 - job: Windows
@@ -41,3 +45,7 @@ jobs:
     inputs:
       testRunner: VSTest
       testResultsFiles: '**/*.trx'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'cobertura'
+      summaryFileLocation: '**/*.cobertura.xml'
