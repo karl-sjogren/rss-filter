@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(ProjectDir)feeds.json" CopyToOutputDirectory="Always" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.6"/>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
