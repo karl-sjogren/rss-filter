@@ -23,19 +23,19 @@ namespace Shorthand.RssFilter.Models {
         }
     }
 
-    public class ContainsFilter : FilterBase {
-        public ContainsFilter() : base("Contains") { }
-
-        public override bool Evaluate(string input) {
-            return input?.Contains(Value, StringComparison.OrdinalIgnoreCase) == true;
-        }
-    }
-
     public class EndsWithFilter : FilterBase {
         public EndsWithFilter() : base("EndsWith") { }
 
         public override bool Evaluate(string input) {
             return input?.EndsWith(Value, StringComparison.OrdinalIgnoreCase) == true;
+        }
+    }
+
+    public class ContainsFilter : FilterBase {
+        public ContainsFilter() : base("Contains") { }
+
+        public override bool Evaluate(string input) {
+            return input?.Contains(Value, StringComparison.OrdinalIgnoreCase) == true;
         }
     }
 
@@ -56,7 +56,7 @@ namespace Shorthand.RssFilter.Models {
             if(_expression == null)
                 _expression = new Regex(Value, RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-            return _expression.IsMatch(input);
+            return _expression.IsMatch(input ?? string.Empty);
         }
     }
 }

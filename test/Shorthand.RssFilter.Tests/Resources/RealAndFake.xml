@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <item>
+            <link>https://example.com/real-url</link>
+            <guid isPermaLink="true">https://example.com/real-url</guid>
+            <category>news/real</category>
+            <title><![CDATA[A real news item]]></title>
+            <pubDate>Tue, 1 Jan 2019 12:05:50 +0100</pubDate>
+            <description>A real description</description>
+        </item>
+        <item>
+            <link>https://example.com/fake-url</link>
+            <guid isPermaLink="true">https://example.com/fake-url</guid>
+            <category>news/fake</category>
+            <title><![CDATA[A fake news item]]></title>
+            <pubDate>Tue, 1 Jan 2019 12:05:50 +0100</pubDate>
+            <description>A fake description</description>
+        </item>
+    </channel>
+</rss>
