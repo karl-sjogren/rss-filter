@@ -10,7 +10,6 @@ using System;
 namespace Shorthand.RssFilter.Tests {
     public class RssFilterServiceTests {
         private readonly RssFilterService _service;
-        private readonly XDocument _document;
 
         public RssFilterServiceTests() {
             _service = new RssFilterService();
@@ -32,10 +31,72 @@ namespace Shorthand.RssFilter.Tests {
         }
 
         [Fact]
-        public async Task TestEmptyConfiguration() {
+        public async Task TestEmptyConfigurationRemovesAll() {
             var document = await GetFeedFromResource("Aftonbladet.xml");
-            
+
             _service.FilterFeed(new FeedConfiguration(), document);
+
+            var itemCount = document.Descendants("item").Count();
+            Assert.Equal(0, itemCount);
+        }
+
+        [Fact]
+        public async Task TestMatchAllConfiguration() {
+            var document = await GetFeedFromResource("RealAndFake.xml");
+            var feedConfiguration = new FeedConfiguration {
+                Items = new FeedItem[] {
+                    new FeedItem {
+                        Filters = new FilterBase[] {
+                            new StartsWithFilter { MatchOn = MatchType.Title, Value = "A real" },
+                            new EndsWithFilter { MatchOn = MatchType.Description, Value = "real description" },
+                            new ContainsFilter { MatchOn = MatchType.Link, Value = "real-url" },
+                            new MatchesFilter { MatchOn = MatchType.Category, Value = "news/real" }
+                        }
+                    }
+                }
+            };
+
+            _service.FilterFeed(feedConfiguration, document);
+
+            var itemCount = document.Descendants("item").Count();
+            Assert.Equal(1, itemCount);
+        }
+
+        [Fact]
+        public async Task TestMatchAllWithOnlyGlobalFiltersConfiguration() {
+            var document = await GetFeedFromResource("RealAndFake.xml");
+            var feedConfiguration = new FeedConfiguration {
+                Filters = new FilterBase[] {
+                    new StartsWithFilter { MatchOn = MatchType.Title, Value = "A real" },
+                    new EndsWithFilter { MatchOn = MatchType.Description, Value = "real description" },
+                    new ContainsFilter { MatchOn = MatchType.Link, Value = "real-url" },
+                    new MatchesFilter { MatchOn = MatchType.Category, Value = "news/real" }
+                }
+            };
+
+            _service.FilterFeed(feedConfiguration, document);
+
+            var itemCount = document.Descendants("item").Count();
+            Assert.Equal(1, itemCount);
+        }
+
+        [Fact]
+        public async Task TestUndoMatches() {
+            var document = await GetFeedFromResource("RealAndFake.xml");
+            var feedConfiguration = new FeedConfiguration {
+                Items = new FeedItem[] {
+                    new FeedItem {
+                        Filters = new FilterBase[] {
+                            new StartsWithFilter { MatchOn = MatchType.Title, Value = "A real" },
+                            new EndsWithFilter { MatchOn = MatchType.Description, Value = "real description" },
+                            new ContainsFilter { MatchOn = MatchType.Link, Value = "real-url", Negative = true },
+                            new MatchesFilter { MatchOn = MatchType.Category, Value = "news/real" }
+                        }
+                    }
+                }
+            };
+
+            _service.FilterFeed(feedConfiguration, document);
 
             var itemCount = document.Descendants("item").Count();
             Assert.Equal(0, itemCount);

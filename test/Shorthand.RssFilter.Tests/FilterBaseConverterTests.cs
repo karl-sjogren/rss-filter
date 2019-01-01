@@ -49,5 +49,30 @@ namespace Shorthand.RssFilter.Tests {
             // This should not throw
             _ = result.Evaluate("zebra");
         }
+
+        [Fact]
+        public void TestReadInvalidFilter() {
+            var json = @"{
+                ""MatchOn"": ""Title"",
+                ""Type"": ""Zebra"",
+                ""Value"": ""zebra""
+              }";
+
+            var result = JsonConvert.DeserializeObject<FilterBase>(json, new FilterBaseConverter());
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void TestReadMissingFilterType() {
+            var json = @"{
+                ""MatchOn"": ""Title"",
+                ""Value"": ""zebra""
+              }";
+
+            var result = JsonConvert.DeserializeObject<FilterBase>(json, new FilterBaseConverter());
+
+            Assert.Null(result);
+        }
     }
 }

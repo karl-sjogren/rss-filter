@@ -21,6 +21,12 @@ namespace Shorthand.RssFilter.Services {
                 var category = item.Descendants("category").FirstValueOrDefault();
                 var link = item.Descendants("link").FirstValueOrDefault();
 
+                if(feedConfiguration.Filters.Any() && !feedConfiguration.Items.Any()) {
+                    feedConfiguration.Items = new[] { 
+                        new FeedItem { Name = "Global filters" }
+                    };
+                }
+
                 foreach(var feedItem in feedConfiguration.Items) {
                     if(keepItem)
                         continue;
