@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Shorthand.RssFilter\Shorthand.RssFilter.csproj" />
   </ItemGroup>
 

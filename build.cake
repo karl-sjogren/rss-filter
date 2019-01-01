@@ -20,6 +20,7 @@ Task("clean")
         CleanDirectories("./test/**/bin/Debug");
         CleanDirectories("./test/**/obj/Debug");
         CleanDirectory("./artifacts");
+        CleanDirectory("./coverage");
     });    
 
 Task("build")
@@ -67,9 +68,9 @@ Task("azure-pipeline")
 
         var coverletSettings = new CoverletSettings {
             CollectCoverage = true,
-            CoverletOutputFormat = CoverletOutputFormat.cobertura | CoverletOutputFormat.opencover,
+            CoverletOutputFormat = CoverletOutputFormat.cobertura,
             CoverletOutputDirectory = Directory(@".\coverage\"),
-            CoverletOutputName = $"results-{DateTime.UtcNow:dd-MM-yyyy-HH-mm-ss-FFF}"
+            CoverletOutputName = "results"
         };
             
         DotNetCoreTest("./test/Shorthand.RssFilter.Tests/Shorthand.RssFilter.Tests.csproj", settings, coverletSettings);
