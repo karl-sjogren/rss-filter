@@ -56,9 +56,7 @@ namespace Shorthand.RssFilter {
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             if(env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
-            } else {
-                app.UseHsts();
-            }
+            } 
 
             var rnd = new Random();
             app.Use(async (ctx, next) => {

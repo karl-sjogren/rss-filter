@@ -24,6 +24,7 @@ namespace Shorthand.RssFilter {
                 .UseConfiguration(config)
                 .UseKestrel(options => {
                     options.AddServerHeader = false;
+                    options.ListenAnyIP(1138);
                 })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 /* This one is great to find out namespaces for message filtering

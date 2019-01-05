@@ -68,7 +68,7 @@ namespace Shorthand.RssFilter.Tests {
             var feedConfiguration = new FeedConfiguration {
                 FilterGroups = new[] {
                     new FilterGroup { 
-                    Name = "Named filter",
+                        Name = "Named filter",
                         Filters = new FilterBase[] {
                             new StartsWithFilter { MatchOn = MatchType.Title, Value = "A real" },
                             new EndsWithFilter { MatchOn = MatchType.Description, Value = "real description" },
