@@ -59,4 +59,10 @@ namespace Shorthand.RssFilter.Models {
             return _expression.IsMatch(input ?? string.Empty);
         }
     }
+
+    public class ImportGroupFilter : FilterBase {
+        public ImportGroupFilter() : base("ImportGroup") { }
+
+        public override bool Evaluate(string input) => true;
+    }
 }

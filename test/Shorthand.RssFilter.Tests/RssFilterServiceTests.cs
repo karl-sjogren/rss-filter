@@ -63,14 +63,26 @@ namespace Shorthand.RssFilter.Tests {
         }
 
         [Fact]
-        public async Task TestMatchAllWithOnlyGlobalFiltersConfiguration() {
+        public async Task TestMatchAllWithOnlyNamedFilterGroupsConfiguration() {
             var document = await GetFeedFromResource("RealAndFake.xml");
             var feedConfiguration = new FeedConfiguration {
-                Filters = new FilterBase[] {
-                    new StartsWithFilter { MatchOn = MatchType.Title, Value = "A real" },
-                    new EndsWithFilter { MatchOn = MatchType.Description, Value = "real description" },
-                    new ContainsFilter { MatchOn = MatchType.Link, Value = "real-url" },
-                    new MatchesFilter { MatchOn = MatchType.Category, Value = "news/real" }
+                FilterGroups = new[] {
+                    new FilterGroup { 
+                    Name = "Named filter",
+                        Filters = new FilterBase[] {
+                            new StartsWithFilter { MatchOn = MatchType.Title, Value = "A real" },
+                            new EndsWithFilter { MatchOn = MatchType.Description, Value = "real description" },
+                            new ContainsFilter { MatchOn = MatchType.Link, Value = "real-url" },
+                            new MatchesFilter { MatchOn = MatchType.Category, Value = "news/real" }
+                        }
+                    }
+                },
+                Items = new FeedItem[] {
+                    new FeedItem {
+                        Filters = new FilterBase[] {
+                            new ImportGroupFilter { Value = "Named filter" }
+                        }
+                    }
                 }
             };
 

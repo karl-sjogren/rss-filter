@@ -21,19 +21,26 @@ namespace Shorthand.RssFilter.Services {
                 var category = item.Descendants("category").FirstValueOrDefault();
                 var link = item.Descendants("link").FirstValueOrDefault();
 
-                if(feedConfiguration.Filters.Any() && !feedConfiguration.Items.Any()) {
-                    feedConfiguration.Items = new[] { 
-                        new FeedItem { Name = "Global filters" }
-                    };
-                }
-
                 foreach(var feedItem in feedConfiguration.Items) {
                     if(keepItem)
                         continue;
 
                     var allPassed = true;
+                    var filters = feedItem.Filters
+                                            .Where(filter => filter.Type != "ImportGroup")
+                                            .ToList();
 
-                    foreach(var filter in feedItem.Filters.Concat(feedConfiguration.Filters)) {
+                    var linkedGroupNames = feedItem.Filters
+                                            .Where(filter => filter.Type == "ImportGroup")
+                                            .Select(filter => filter.Value)
+                                            .ToArray();
+                    
+                    var groupFilters = feedConfiguration.FilterGroups
+                                        .Where(group => linkedGroupNames.Contains(group.Name, StringComparer.OrdinalIgnoreCase))
+                                        .SelectMany(group => group.Filters)
+                                        .ToArray();
+
+                    foreach(var filter in filters.Concat(groupFilters)) {
                         if(filter == null)
                             continue;
 
