@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9922D81F-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shorthand.RssFilter.Tests", "test\Shorthand.RssFilter.Tests\Shorthand.RssFilter.Tests.csproj", "{68CF4872-DC57-4116-8028-2D9312322037}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shorthand.RssFilter.UI", "src\Shorthand.RssFilter.UI\Shorthand.RssFilter.UI.csproj", "{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,9 +50,22 @@ Global
 		{68CF4872-DC57-4116-8028-2D9312322037}.Release|x64.Build.0 = Release|Any CPU
 		{68CF4872-DC57-4116-8028-2D9312322037}.Release|x86.ActiveCfg = Release|Any CPU
 		{68CF4872-DC57-4116-8028-2D9312322037}.Release|x86.Build.0 = Release|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Debug|x64.Build.0 = Debug|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Debug|x86.Build.0 = Debug|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Release|x64.ActiveCfg = Release|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Release|x64.Build.0 = Release|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{20468F6B-A186-4069-8717-3599EFE353DD} = {791A2020-BC71-43C2-B678-492DA79B5A37}
 		{68CF4872-DC57-4116-8028-2D9312322037} = {9922D81F-01DF-4347-A51A-7910970989F1}
+		{8C81ABEC-F073-4896-9223-BF49C1F6F7A5} = {791A2020-BC71-43C2-B678-492DA79B5A37}
 	EndGlobalSection
 EndGlobal

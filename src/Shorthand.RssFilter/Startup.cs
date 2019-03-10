@@ -33,10 +33,10 @@ namespace Shorthand.RssFilter {
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc().AddJsonOptions(o => {
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddHttpClient();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services
+                .AddHttpClient()
                 .AddSingleton<IRssFilterService, RssFilterService>()
                 .AddSingleton<IRssService, RssService>()
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
