@@ -18,6 +18,9 @@ jobs:
   - task: DotNetCoreInstaller@0
     inputs:
       version: '2.2.104'
+  - task: NodeTool@0 
+    inputs:
+      versionSpec: '8.x'
   - bash: ./build.sh --target=azure-pipeline
     env:
       COREHOST_TRACE: 0
@@ -45,6 +48,9 @@ jobs:
   - task: DotNetCoreInstaller@0
     inputs:
       version: '2.2.104'
+  - task: NodeTool@0 
+    inputs:
+      versionSpec: '8.x'
   - powershell: .\build.ps1 -Target azure-pipeline
     env:
       COREHOST_TRACE: 0
