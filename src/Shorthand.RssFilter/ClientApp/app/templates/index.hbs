@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <th class="col-name">Name</th>
+    <th class="col-uri">Uri</th>
+    <th class="col-actions"></th>
+  </thead>
+  <tbody>
+    {{#each feeds as |feed|}}
+      <tr>
+        <td>{{feed.name}}</td>
+        <td><a href="{{feed.configuration.uri}}">{{feed.configuration.uri}}</a></td>
+        <td>
+          <button class="btn btn-edit">Edit</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

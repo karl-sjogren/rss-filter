@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +8,7 @@ using Shorthand.RssFilter.Extensions;
 using Shorthand.RssFilter.Models;
 
 namespace Shorthand.RssFilter.Controllers {
-    [Route("rss")]
+    [Route("feeds")]
     [ApiController]
     public class RssController : ControllerBase {
         private readonly ApplicationConfiguration _configuration;
@@ -45,7 +42,8 @@ namespace Shorthand.RssFilter.Controllers {
             return new JsonResult(feedConfiguration);
         }
 
-        [HttpGet("{name}/feed")]
+        [HttpGet("{name}/rss")]
+        [HttpGet("/rss/{name}/feed")] // For backwards compatability for now
         public async Task<ActionResult<string>> GetFilteredFeed(string name) {
             if(!_configuration.TryGetValue(name, out var feedConfiguration))
                 return NotFound();

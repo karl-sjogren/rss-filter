@@ -51,29 +51,32 @@ namespace Shorthand.RssFilter {
                 var json = File.ReadAllText("feeds.json");
                 JsonConvert.PopulateObject(json, options, settings);
             });
+
+            // In production, the Ember files will be served from this directory
+            services.AddSpaStaticFiles(configuration => {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             if(env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
-            } 
-
-            var rnd = new Random();
-            app.Use(async (ctx, next) => {
-                if(ctx.Request.Path != PathString.FromUriComponent("/")) {
-                    await next();
-                    return;
-                }
-
-                var animals = new[] {"🦒", "🦓", "🦙", "🐘", "🐅" };
-
-                var animal = animals[rnd.Next(animals.Length)];
-
-                await ctx.Response.WriteAsync(@"<html><head><meta charset=""utf-8""><style type=""text/css"">body { margin: 0; } .animal { width: 100vw; height: 100vh; } .animal span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 300px; } @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) { .animal span { font-size: 146px; } }</style></head><body><div class=""animal""><span>" + animal + "</span></div></body></html>", Encoding.UTF8);
-            });
+            }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
             app.UseMvc();
+
+            app.UseSpa(spa => {
+                spa.Options.SourcePath = "ClientApp/";
+
+                if(env.IsDevelopment()) {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                }
+            });
         }
     }
 }
