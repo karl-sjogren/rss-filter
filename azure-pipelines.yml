@@ -13,7 +13,7 @@ jobs:
 # Run a build on macOS at the same time
 - job: macOS
   pool:
-    vmImage: 'xcode9-macos10.13'
+    vmImage: 'macOS-latest'
   steps:
   - task: DotNetCoreInstaller@0
     inputs:
@@ -43,7 +43,7 @@ jobs:
 # Run a build on Windows at the same time
 - job: Windows
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'windows-latest'
   steps:
   - task: DotNetCoreInstaller@0
     inputs:
